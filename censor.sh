@@ -25,6 +25,6 @@ echo file output$index.mp3 >> edits.txt
 
 ffmpeg -f concat -i edits.txt -c copy final.mp3
 
-rm output*
+rm output*mp3
 rm edits.txt
 
