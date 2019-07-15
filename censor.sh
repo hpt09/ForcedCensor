@@ -1,7 +1,8 @@
 
 
 outputString=`python time.py frequencies`
-#echo $outputString
+
+> edits.txt
 
 IFS=' ' # space is set as delimiter
 read -ra ADDR <<< "$outputString"
@@ -14,8 +15,16 @@ for i in "${ADDR[@]}"; do
 	
 	endTime=${ADDR[0]}
 	ffmpeg -i lucier.mp3 -ss $startTime -to $endTime output$index.mp3
+	echo file output$index.mp3 >> edits.txt
 	index=$((index+1))
 	startTime=${ADDR[1]}
 done
 
 ffmpeg -i lucier.mp3 -ss $startTime output$index.mp3
+echo file output$index.mp3 >> edits.txt
+
+ffmpeg -f concat -i edits.txt -c copy final.mp3
+
+rm output*
+rm edits.txt
+
