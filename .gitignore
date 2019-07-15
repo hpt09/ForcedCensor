@@ -111,3 +111,6 @@ venv.bak/
 
 #Transcripts and output files
 *.txt
+
+#Backup files created by some editers
+*~

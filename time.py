@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("word")
 args = parser.parse_args()
 
-with open('output_not_afraid.txt') as f:
+with open('output.txt') as f:
     data = json.load(f)
 
 wordTimes = ""
