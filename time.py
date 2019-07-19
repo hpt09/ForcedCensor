@@ -7,24 +7,50 @@ Created on Fri Jul  5 22:27:09 2019
 
 import argparse
 import json
+import re
 
+def atoi(text):
+    if text.isdigit():
+        return int(text) 
+    else:
+        return text
 
-parser = argparse.ArgumentParser()
-parser.add_argument("word")
-args = parser.parse_args()
+def natural_keys(text):
+    return [ atoi(c) for c in re.split('(\d+)',text) ]
+
+# =============================================================================
+# parser = argparse.ArgumentParser()
+# parser.add_argument("word")
+# args = parser.parse_args()
+# =============================================================================
+
 
 with open('output.txt') as f:
     data = json.load(f)
 
+with open('expletives.txt') as f:
+    mylist = f.read().splitlines()
+
+wordTimesList = []
 wordTimes = ""
 
-for word in data:
-    if word['word'] == args.word:
-        startTime = word['start']
-        endTime = word['end']
-        wordTimes = wordTimes + str(startTime) + "-" + str(endTime) + " "
+for x in mylist:
+    for row in data:
+        if x in row['word']:
+            startTime = row['start']
+            endTime = row['end']
+            wordTimesList.append(str(startTime) + "-" + str(endTime))
+            
+
+#Need to sort wordTimes
+wordTimesList.sort(key=natural_keys)
+
+#Printing         
+for x in wordTimesList:
+    wordTimes = wordTimes + x + "\n"
 
 print(wordTimes)
-        
+
+
 
 
