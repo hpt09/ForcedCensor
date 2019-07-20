@@ -47,7 +47,7 @@ wordTimesList.sort(key=natural_keys)
 
 #Printing         
 for x in wordTimesList:
-    wordTimes = wordTimes + x + "\n"
+    wordTimes = wordTimes + x + " "
 
 print(wordTimes)
 
