@@ -1,6 +1,14 @@
+if [ "$1" == "" ]; then
+    echo "No Audio File Provided"
+	exit 1
+fi
 
+if [ "$2" == "" ]; then
+    echo "No Transcript File Provided"
+	exit 1
+fi
 
-outputString=`python time.py`
+outputString=`python time.py $2`
 
 > edits.txt
 

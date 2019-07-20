@@ -5,7 +5,7 @@ Created on Fri Jul  5 22:27:09 2019
 @author: hpt09
 """
 
-import argparse
+import sys
 import json
 import re
 
@@ -18,14 +18,9 @@ def atoi(text):
 def natural_keys(text):
     return [ atoi(c) for c in re.split('(\d+)',text) ]
 
-# =============================================================================
-# parser = argparse.ArgumentParser()
-# parser.add_argument("word")
-# args = parser.parse_args()
-# =============================================================================
+#print(sys.argv)
 
-
-with open('output.txt') as f:
+with open(sys.argv[1]) as f:
     data = json.load(f)
 
 with open('expletives.txt') as f:
