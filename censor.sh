@@ -13,7 +13,7 @@ for i in "${ADDR[@]}"; do
 	echo $i
     IFS='-' # dash is set as delimiter
 	read -ra ADDR <<< "$i"
-	
+	IFS=' ' #resetting IFS value
 	endTime=${ADDR[0]}
 	ffmpeg -i $1 -ss $startTime -to $endTime output$index.mp3
 	echo file output$index.mp3 >> edits.txt
