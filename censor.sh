@@ -11,7 +11,8 @@ fi
 outputString=`python time.py $2`
 
 > edits.txt
-rm output*mp3
+rm output*mp3 2> /dev/null
+rm final*mp3 2> /dev/null
 
 IFS=' ' # space is set as delimiter
 read -ra ADDR <<< "$outputString"
@@ -31,7 +32,7 @@ done
 ffmpeg -i $1 -ss $startTime output$index.mp3 2> /dev/null
 echo file output$index.mp3 >> edits.txt
 
-ffmpeg -f concat -i edits.txt -c copy -f final.mp3 2> /dev/null
+ffmpeg -f concat -i edits.txt -c copy final.mp3 2> /dev/null
 
 rm output*mp3
 rm edits.txt
