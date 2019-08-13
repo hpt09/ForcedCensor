@@ -1,22 +1,38 @@
 from pydub import AudioSegment
 from pydub.playback import play
 import subprocess
+import sys
 
-sound_stereo = AudioSegment.from_file("Eminem-Not-Afraid.wav", format="wav")
+# parse args from command line
+if len(sys.argv) > 1: 
+    audio_file = sys.argv[1]
+else:
+    print("No audio file provided")
+    sys.exit()
+
+if len(sys.argv) > 2: 
+    transcript_file = sys.argv[2]
+else:
+    print("No transcript file provided")
+    sys.exit()
 
 
-retrieve_times_process = subprocess.Popen(['python', 'time.py', 'output_not_afraid.txt'], 
+sound_stereo = AudioSegment.from_file(audio_file, format="mp3")
+
+
+retrieve_times_process = subprocess.Popen(['python', 'time.py', transcript_file], 
             stdout=subprocess.PIPE, 
             stderr=subprocess.STDOUT)
 explicit_times,stderr = retrieve_times_process.communicate()
 
 # remove white spaces and last element (/n)
 explicit_times = explicit_times.split(' ')[:-1]
-
+# print explicit_times
 for time in explicit_times:
     start = float(time.split('-')[0])
     end = float(time.split('-')[1])
-    
+    #print "start: " + str(start) + " end: " + str(end)
+
     # modify so it can be manipulated by phase cancellation
     start =  int((start - 0.1) * 1000)
     end = int((end + 0.1) * 1000)
@@ -33,4 +49,4 @@ for time in explicit_times:
     sound_stereo = sound_stereo[:start]+sound_CentersOut+sound_stereo[end:]
 
 
-withoutVocals = sound_stereo.export("filtertest.wav", format="wav")
+withoutVocals = sound_stereo.export("FILTERED-"+audio_file, format="wav")
