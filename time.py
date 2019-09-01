@@ -31,7 +31,7 @@ wordTimes = ""
 
 for x in mylist:
     for row in data:
-        if x in row['word']:
+        if x.lower() in row['word'].lower():
             startTime = row['start']
             endTime = row['end']
             wordTimesList.append(str(startTime) + "-" + str(endTime))
