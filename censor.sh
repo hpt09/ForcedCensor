@@ -4,15 +4,16 @@ if [ "$1" == "" ]; then
 fi
 
 if [ "$2" == "" ]; then
-    echo "No Transcript File Provided"
+    echo "No Aligned Transcript File Provided"
 	exit 1
 fi
-
-outputString=`python time.py $2`
+echo "$1"
+echo "$2"
+outputString=`python time.py "$2"`
 
 > edits.txt
 rm output*mp3 2> /dev/null
-rm final*mp3 2> /dev/null
+rm censored-"$1" 2> /dev/null
 
 IFS=' ' # space is set as delimiter
 read -ra ADDR <<< "$outputString"
@@ -23,16 +24,16 @@ for i in "${ADDR[@]}"; do
 	read -ra ADDR <<< "$i"
 	IFS=' ' #resetting IFS value
 	endTime=${ADDR[0]}
-	ffmpeg -i $1 -ss $startTime -to $endTime output$index.mp3 2> /dev/null
+	ffmpeg -i "$1" -ss $startTime -to $endTime output$index.mp3 2> /dev/null
 	echo file output$index.mp3 >> edits.txt
 	index=$((index+1))
 	startTime=${ADDR[1]}
 done
 
-ffmpeg -i $1 -ss $startTime output$index.mp3 2> /dev/null
+ffmpeg -i "$1" -ss $startTime output$index.mp3 2> /dev/null
 echo file output$index.mp3 >> edits.txt
 
-ffmpeg -f concat -i edits.txt -c copy final.mp3 2> /dev/null
+ffmpeg -f concat -i edits.txt -c copy censored-"$1" 2> /dev/null
 
 rm output*mp3
 rm edits.txt
