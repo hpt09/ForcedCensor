@@ -118,3 +118,4 @@ venv.bak/
 #Intellij files
 out/
 .idea/
+META-INF/
