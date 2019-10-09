@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.stage.StageStyle;
@@ -16,12 +17,21 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private Parent root;
+    private static Parent splashRoot;
+    private static Parent alignRoot;
+    private static Parent censorRoot;
+    private static Parent endRoot;
     private static Stage _primaryStage;
 
     private static double xOffset = 0;
     private static double yOffset = 0;
 
+
+
+    //private SplashController splashController;
+    private static AlignController alignController;
+    private static CensorController censorController;
+    private static EndController endController;
 
     private static SplashController _controller;
 
@@ -32,6 +42,21 @@ public class Main extends Application {
         launch(args);
     }
 
+    public static AnchorPane getRoots(BeepScene alignScreen) {
+
+        switch (alignScreen) {
+            case AlignScreen:
+                return (AnchorPane) alignRoot;
+            case CensorScreen:
+                return (AnchorPane) censorRoot;
+            case EndScreen:
+                return (AnchorPane) endRoot;
+             default:
+                 return null;
+        }
+
+    }
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -39,15 +64,14 @@ public class Main extends Application {
         _primaryStage = primaryStage;
 
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SplashScreen.fxml"));
-        root = loader.load();
+        splashRoot = loader.load();
         _controller = loader.getController();
 
 
-        makeWindowMoveable(root);
+        makeWindowMoveable(splashRoot);
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(splashRoot);
         //scene.getStylesheets().add(getClass().getResource("resources/main.css").toExternalForm());
 
         primaryStage.setTitle("Beep!");
@@ -56,7 +80,39 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        loadFXMLS();
+
     }
+
+
+    public void loadFXMLS() throws IOException{
+
+        FXMLLoader alignLoader = new FXMLLoader(getClass().getResource("AlignScreen.fxml"));
+        alignRoot = alignLoader.load();
+        makeWindowMoveable(alignRoot);
+
+        alignController = alignLoader.getController();
+
+        FXMLLoader censorLoader = new FXMLLoader(getClass().getResource("CensorScreen.fxml"));
+        censorRoot = censorLoader.load();
+        makeWindowMoveable(censorRoot);
+
+        censorController = censorLoader.getController();
+
+        FXMLLoader endLoader = new FXMLLoader(getClass().getResource("EndScreen.fxml"));
+        endRoot = endLoader.load();
+        makeWindowMoveable(endRoot);
+
+        endController = endLoader.getController();
+
+    }
+
+
+    public static Stage getPrimaryStage() {
+        return _primaryStage;
+    }
+
 
     public static Parent makeWindowMoveable(Parent root) {
 
@@ -80,10 +136,18 @@ public class Main extends Application {
         return root;
     }
 
-    public static Stage getPrimaryStage() {
-        return _primaryStage;
+
+    public static AlignController getAlignController() {
+        return alignController;
     }
 
+    public static CensorController getCensorController() {
+        return censorController;
+    }
+
+    public static EndController getEndController() {
+        return endController;
+    }
 }
 
 

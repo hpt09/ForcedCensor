@@ -32,7 +32,8 @@ public class EndController {
     @FXML
     private Button exitBtn;
 
-
+    @FXML
+    private Button playBtn;
 
     @FXML
     private Label audioFileName;
@@ -40,13 +41,13 @@ public class EndController {
     @FXML
     private Label lyricFileName;
 
-    private File audioFile;
-    private File lyricFile;
+    private AlignController ac;
 
     public EndController() {
         System.out.println();
         System.out.println();
         System.out.println("================ EndController instantiated: " + this);
+        ac = Main.getAlignController();
 
     }
 
@@ -59,41 +60,27 @@ public class EndController {
     @FXML
     public void play() {
 
+        if (ac.getAudioFile() == null) {
+            audioFileName.setText("You didn't upload a song");
+            return;
+        }
+        audioFileName.setText(ac.getAudioFile().getName());
+
         System.out.println("This controller: "+this);
-        if (getAudioFile() == null) {
+        if (ac.getAudioFile() == null) {
             System.out.print("null");
         } else {
-            System.out.println(getAudioFile().getName());
+            System.out.println(ac.getAudioFile().getName());
 
         }
 
-//        System.out.println(getAudioFile().toURI().toString());
-//        Media sound = new Media(getAudioFile().toURI().toString());
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.play();
+        //System.out.println(getAudioFile().toURI().toString());
+        Media sound = new Media(ac.getAudioFile().toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+        playBtn.setDisable(true);
+
     }
-
-
-
-
-
-
-    public File getAudioFile() {
-        return audioFile;
-    }
-
-    public void setAudioFile(File audioFile) {
-        this.audioFile = audioFile;
-    }
-
-    public File getLyricFile() {
-        return lyricFile;
-    }
-
-    public void setLyricFile(File lyricFile) {
-        this.lyricFile = lyricFile;
-    }
-
 
 }
 

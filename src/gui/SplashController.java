@@ -39,14 +39,8 @@ public class SplashController {
     public void handleStart() throws IOException {
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AlignScreen.fxml"));
-        AnchorPane root = loader.load();
-        System.out.println("Align screen controller was: " +loader.getController().toString());
-        //loader.setController(Main.getController());
-        //System.out.println("Align screen controller is now: " +loader.getController().toString());
-        Main.makeWindowMoveable(root);
-
-        Main.getPrimaryStage().getScene().setRoot(root);
+        AnchorPane alignRoot = Main.getRoots(BeepScene.AlignScreen);
+        Main.getPrimaryStage().getScene().setRoot(alignRoot);
     }
 
 

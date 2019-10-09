@@ -102,13 +102,8 @@ public class CensorController {
 
         }
 
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("EndScreen.fxml"));
-        AnchorPane root = loader.load();
-
-
-        Main.makeWindowMoveable(root);
-        Main.getPrimaryStage().getScene().setRoot(root);
+        AnchorPane endRoot = Main.getRoots(BeepScene.EndScreen);
+        Main.getPrimaryStage().getScene().setRoot(endRoot);
 
 
     }

@@ -39,6 +39,7 @@
                 <Font name="Lato Light" size="15.0" />
             </font>
         </Label>
-      <Button layoutX="352.0" layoutY="255.0" mnemonicParsing="false" onAction="#play" text="Play" />
+      <Button fx:id="playBtn" layoutX="352.0" layoutY="255.0" mnemonicParsing="false" onAction="#play" text="Play" />
+      <Label fx:id="audioFileName" layoutX="253.0" layoutY="348.0" prefHeight="17.0" prefWidth="215.0" text="Label" />
     </children>
 </AnchorPane>

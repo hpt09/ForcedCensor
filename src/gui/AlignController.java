@@ -51,6 +51,11 @@ import java.util.ResourceBundle;
         private Label warningLabel;
 
 
+
+
+        private File audioFile;
+        private File lyricFile;
+
         public AlignController() {
             System.out.println();
             System.out.println();
@@ -58,8 +63,6 @@ import java.util.ResourceBundle;
 
         }
 
-        private File audioFile;
-        private File lyricFile;
 
 
         @FXML
@@ -102,35 +105,21 @@ import java.util.ResourceBundle;
         public void handleAlign() throws IOException {
 
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CensorScreen.fxml"));
-            AnchorPane root = loader.load();
-
-            Main.makeWindowMoveable(root);
-
-            Main.getPrimaryStage().getScene().setRoot(root);
+            AnchorPane censorRoot = Main.getRoots(BeepScene.CensorScreen);
+            Main.getPrimaryStage().getScene().setRoot(censorRoot);
 
 
             // Insert Bash Code here
 
         }
 
+        public File getAudioFile() {
+            return audioFile;
+        }
 
-
-//        public File getAudioFile() {
-//            return audioFile;
-//        }
-//
-//        public void setAudioFile(File audioFile) {
-//            this.audioFile = audioFile;
-//        }
-//
-//        public File getLyricFile() {
-//            return lyricFile;
-//        }
-//
-//        public void setLyricFile(File lyricFile) {
-//            this.lyricFile = lyricFile;
-//        }
+        public File getLyricFile() {
+            return lyricFile;
+        }
     }
 
 

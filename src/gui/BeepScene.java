@@ -1,5 +1,5 @@
 package gui;
 
 public enum BeepScene {
-    SplashScreen, AlignScreen, CensorScreen;
+    SplashScreen, AlignScreen, CensorScreen, EndScreen;
 }
