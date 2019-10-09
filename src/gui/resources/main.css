@@ -1,13 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 
-* {
-	/* Frequently referred to colours.
-	-fx-base: #3D4956;
-	-fx-primary: #00A2D3;*/
-
-}
-
 
 .root {
 
@@ -16,8 +9,10 @@
 }
 
 @font-face {
-    font-family: "Lato";
-    src: url(resources/Lato-Light.ttf);
+
+    src: url("Lato-Light.ttf");
+
+
 }
 
 .startBtn {
@@ -54,6 +49,7 @@
 
 
 .uploadBtn {
+    /* Light green*/
     -fx-background-color: #b2ff59;
 }
 
@@ -62,10 +58,41 @@
     -fx-cursor: hand;
 }
 
+.tooltip {
 
-.label {
-    -font-family: "Lato";
+    -fx-show-delay: 25000ms;
+}
 }
 
+.censorButtons {
+    -fx-background-color: rgba(61,109,151,1);
+    -fx-text-fill: white;
+    -fx-font-family: 'Lato Light';
+   	-fx-background-radius: 5;
+   	-fx-border-radius: 5;
+   	-fx-border-color: white;
+    -fx-font-size: 28px;
 
+
+}
+
+.censorButtons:hover {
+    -fx-background-color: rgba(134,194,246,1);
+    -fx-background-radius: 5;
+
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-font-size: 28px;
+}
+
+.censorButtons:selected {
+    -fx-background-color: rgba(134,194,246,1);
+    -fx-border-radius: 5;
+    -fx-border-color: #b2ff59;
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+
+
+
+}
 
