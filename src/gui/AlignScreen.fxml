@@ -34,14 +34,14 @@
                 <Font name="Lato Light" size="28.0" />
             </font>
         </Button>
-      <Button layoutX="201.0" layoutY="293.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="69.0" styleClass="uploadBtn" text="Upload" />
-      <Button layoutX="479.0" layoutY="293.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="69.0" styleClass="uploadBtn" text="Upload" />
+      <Button fx:id="audioUploadBtn" layoutX="201.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="36.0" prefWidth="69.0" styleClass="uploadBtn" text="Upload" />
+      <Button fx:id="lyricUploadBtn" layoutX="479.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="36.0" prefWidth="69.0" styleClass="uploadBtn" text="Upload" />
       <Label alignment="CENTER" layoutX="91.0" layoutY="377.0" prefHeight="67.0" prefWidth="598.0" text="Hit Align when ready." textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="22.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="119.0" layoutY="336.0" prefHeight="21.0" prefWidth="219.0" text="Supported file types: .mp3 .wav" textAlignment="JUSTIFY" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="119.0" layoutY="336.0" prefHeight="21.0" prefWidth="219.0" stylesheets="@resources/main.css" text="Supported file types: .mp3 .wav" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="15.0" />
          </font>
@@ -61,12 +61,12 @@
             <Image url="@resources/lyrics.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="206.0" layoutY="261.0" prefHeight="21.0" prefWidth="60.0" text="Audio" textAlignment="JUSTIFY" textFill="WHITE">
+      <Label fx:id="audioFileName" alignment="CENTER" layoutX="157.0" layoutY="261.0" prefHeight="21.0" prefWidth="157.0" text="Audio" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="15.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="484.0" layoutY="261.0" prefHeight="21.0" prefWidth="60.0" text="Lyrics" textAlignment="JUSTIFY" textFill="WHITE">
+      <Label fx:id="lyricFileName" alignment="CENTER" layoutX="435.0" layoutY="261.0" prefHeight="21.0" prefWidth="157.0" text="Lyrics" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="15.0" />
          </font>

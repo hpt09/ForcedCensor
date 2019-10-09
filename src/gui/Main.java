@@ -15,9 +15,12 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private double xOffset = 0;
-    private double yOffset = 0;
     private Parent root;
+    private static Stage _primaryStage;
+
+    private static double xOffset = 0;
+    private static double yOffset = 0;
+
 
 
     public static void main(String[] args) {
@@ -27,25 +30,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
+        _primaryStage = primaryStage;
         root = FXMLLoader.load(getClass().getResource("SplashScreen.fxml"));
 
-        // Code for making window moveable, can remove this if don't want undecorated stage style
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setX(event.getScreenX() - xOffset);
-                primaryStage.setY(event.getScreenY() - yOffset);
-            }
-        });
-
-
+        makeWindowMoveable(root);
 
         Scene scene = new Scene(root);
         //scene.getStylesheets().add(getClass().getResource("resources/main.css").toExternalForm());
@@ -58,43 +46,35 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public static Parent makeWindowMoveable(Parent root) {
 
-//    public void changeScene(BeepScene sceneToChangeTo) throws IOException {
-//
-//        root = FXMLLoader.load(getClass().getResource("SplashScreen.fxml"));
-//
-//        // Code for making window moveable, can remove this if don't want undecorated stage style
-//        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                xOffset = event.getSceneX();
-//                yOffset = event.getSceneY();
-//            }
-//        });
-//        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                primaryStage.setX(event.getScreenX() - xOffset);
-//                primaryStage.setY(event.getScreenY() - yOffset);
-//            }
-//        });
-//
-//
-//
-//        Scene scene = new Scene(root);
-//        //scene.getStylesheets().add(getClass().getResource("resources/main.css").toExternalForm());
-//
-//        primaryStage.setTitle("Beep!");
-//        //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("resources/logo.png")));
-//        primaryStage.initStyle(StageStyle.UNDECORATED);
-//        primaryStage.setResizable(false);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
-//
-//
-//    }
+        // Code for making window moveable, can remove this if don't want undecorated stage style
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
 
+                _primaryStage.setX(event.getScreenX() - xOffset);
+                _primaryStage.setY(event.getScreenY() - yOffset);
+            }
+        });
 
+        return root;
+    }
 
+    public static Stage getPrimaryStage() {
+        return _primaryStage;
+    }
 
 }
+
+
+
+
+
