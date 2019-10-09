@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="553.0" prefWidth="759.0" stylesheets="@resources/main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+<AnchorPane prefHeight="553.0" prefWidth="759.0" stylesheets="@resources/main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SplashController">
    <children>
       <ImageView fitHeight="169.0" fitWidth="170.0" layoutX="306.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -24,7 +24,7 @@
             <Font name="Lato Light" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="startBtn" layoutX="327.0" layoutY="437.0" mnemonicParsing="false" onAction="#start" prefHeight="67.0" prefWidth="125.0" styleClass="startBtn" text="Start" textFill="#ffffff78">
+      <Button fx:id="startBtn" layoutX="327.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="67.0" prefWidth="125.0" styleClass="startBtn" text="Start" textFill="#ffffff78">
          <font>
             <Font name="Lato Light" size="22.0" />
          </font>

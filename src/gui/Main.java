@@ -11,6 +11,7 @@ import javafx.stage.StageStyle;
 import javafx.scene.input.MouseEvent;
 
 
+import java.io.File;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -22,16 +23,27 @@ public class Main extends Application {
     private static double yOffset = 0;
 
 
+    private static SplashController _controller;
+
+    private File audioFile;
+    private File lyricFile;
 
     public static void main(String[] args) {
         launch(args);
     }
 
+
     @Override
     public void start(Stage primaryStage) throws IOException {
 
         _primaryStage = primaryStage;
-        root = FXMLLoader.load(getClass().getResource("SplashScreen.fxml"));
+
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SplashScreen.fxml"));
+        root = loader.load();
+        _controller = loader.getController();
+
 
         makeWindowMoveable(root);
 
@@ -39,7 +51,7 @@ public class Main extends Application {
         //scene.getStylesheets().add(getClass().getResource("resources/main.css").toExternalForm());
 
         primaryStage.setTitle("Beep!");
-        //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("resources/logo.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("resources/logo.png")));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
