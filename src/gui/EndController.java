@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 import static javafx.fxml.FXMLLoader.load;
 
-public class EndController {
+public class EndController{
 
 
     @FXML
@@ -38,10 +38,10 @@ public class EndController {
     @FXML
     private Label audioFileName;
 
-    @FXML
-    private Label lyricFileName;
+
 
     private AlignController ac;
+    private String censoringMethod;
 
     public EndController() {
         System.out.println();
@@ -64,29 +64,53 @@ public class EndController {
             audioFileName.setText("You didn't upload a song");
             playBtn.setDisable(true);
             return;
-        }
-        audioFileName.setText(ac.getAudioFile().getName());
-
-        System.out.println("This controller: "+this);
-        if (ac.getAudioFile() == null) {
-            System.out.print("null");
         } else {
             System.out.println(ac.getAudioFile().getName());
-
         }
 
-        String songPath="FILTERED-"+ac.getAudioFile().getName();
-        File fileToPlay = new File(songPath);
 
 
-        Media sound = new Media(fileToPlay.toURI().toString());
-        //Media sound = new Media(ac.getAudioFile().toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
-        playBtn.setDisable(true);
+//        FileChooser fc = new FileChooser();
+//        File testFile = fc.showOpenDialog(null);
+//        System.out.println(testFile.toURI().toString());
+        //  file:/home/shane/ForcedCensor/FILTERED-lucier.mp3
+
+//        String songPath= "~/ForcedCensor/FILTERED-" + ac.getAudioFile().getName();
+        //System.out.println("Song path is: " +songPath);
+
+//        File fileToPlay = new File(songPath);
+//        audioFileName.setText(fileToPlay.getName());
+
+        //System.out.println("file:~/ForcedCensor/FILTERED-" + ac.getAudioFile().getName());
+        //System.out.println(ac.getAudioFile().toURI().toString());
+
+//        System.out.println("attempting to play: "+"file:~/ForcedCensor/FILTERED-" + ac.getAudioFile().getName());
+
+//        String musicFile = "FILTERED-"+ac.getAudioFile().getName();
+//        System.out.println(musicFile);
+//        File file = new File(musicFile);
+//        System.out.println(file.toURI().toString());
+//        Media sound = new Media(file.toURI().toString());
+        //Media sound = new Media("file:/home/shane/ForcedCensor/censored-drake-back-to-back.mp3");
+
+//        Media sound = new Media(fileToPlay.toURI().toString());
+//        Media sound = new Media("file:/home/shane/ForcedCensor/FILTERED-" + ac.getAudioFile().getName());
+
+//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//        mediaPlayer.play();
+//        playBtn.setDisable(true);
 
     }
 
+
+
+    public void setAudioFileName(String name) {
+        audioFileName.setText(name);
+    }
+
+    public void setCensoringMethod(String censoringMethod) {
+        this.censoringMethod = censoringMethod;
+    }
 }
 
 

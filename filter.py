@@ -49,4 +49,4 @@ for time in explicit_times:
     sound_stereo = sound_stereo[:start]+sound_CentersOut+sound_stereo[end:]
 
 
-withoutVocals = sound_stereo.export("FILTERED-"+audio_file, format="wav")
+withoutVocals = sound_stereo.export("filtered-"+audio_file, format="wav")

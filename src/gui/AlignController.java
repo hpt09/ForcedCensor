@@ -87,6 +87,8 @@ import java.util.ResourceBundle;
 
                 if (audioFile != null) {
                     audioFileName.setText(audioFile.getName());
+                } else {
+                    return;
                 }
 
             }
@@ -99,6 +101,8 @@ import java.util.ResourceBundle;
 
                 if (lyricFile != null) {
                     lyricFileName.setText(lyricFile.getName());
+                } else {
+                    return;
                 }
             }
             System.out.println(lyricFileName + "   " +audioFile.getName());
@@ -107,7 +111,9 @@ import java.util.ResourceBundle;
         @FXML
         public void handleAlign() throws IOException {
 
-
+            if (audioFile == null || lyricFile == null) {
+                return;
+            }
             AnchorPane censorRoot = Main.getRoots(BeepScene.CensorScreen);
             Main.getPrimaryStage().getScene().setRoot(censorRoot);
 

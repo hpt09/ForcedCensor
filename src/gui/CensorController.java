@@ -194,6 +194,16 @@ public class CensorController {
 
         }
 
+        //Send AudioFileName to controller
+        EndController eC = Main.getEndController();
+        eC.setCensoringMethod(censoringMethod);
+        if (censoringMethod.equals("Filtering")) {
+            eC.setAudioFileName("filtered-"+ac.getAudioFile().getName());
+        } else {
+            eC.setAudioFileName("trimmed-"+ac.getAudioFile().getName());
+
+        }
+
         AnchorPane endRoot = Main.getRoots(BeepScene.EndScreen);
         Main.getPrimaryStage().getScene().setRoot(endRoot);
 

@@ -33,7 +33,7 @@ done
 ffmpeg -i "$1" -ss $startTime output$index.mp3 2> /dev/null
 echo file output$index.mp3 >> edits.txt
 
-ffmpeg -f concat -i edits.txt -c copy censored-"$1" 2> /dev/null
+ffmpeg -f concat -i edits.txt -c copy trimmed-"$1" 2> /dev/null
 
 rm output*mp3
 rm edits.txt
