@@ -27,7 +27,7 @@
                 <Font name="Lato Light" size="22.0" />
             </font>
         </Label>
-        <Button layoutX="327.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleCensor" prefHeight="67.0" prefWidth="125.0" styleClass="startBtn" text="Censor" textFill="#ffffff78" AnchorPane.bottomAnchor="48.66666666666667" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="306.6666666666667" AnchorPane.topAnchor="437.0">
+        <Button fx:id="censorBtn" layoutX="327.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleCensor" prefHeight="67.0" prefWidth="125.0" styleClass="startBtn" text="Censor" textFill="#ffffff78" AnchorPane.bottomAnchor="48.66666666666667" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="306.6666666666667" AnchorPane.topAnchor="437.0">
             <font>
                 <Font name="Lato Light" size="22.0" />
             </font>

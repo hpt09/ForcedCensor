@@ -118,15 +118,16 @@ public class CensorController {
 //            censorBtn.setDisable(true);
 //                censorBtn.setText("Censoring..");
 
-//            task.setOnRunning((succeesesEvent) -> {
-//
-//                censorBtn.setDisable(true);
-//                censorBtn.setText("Censoring..");
-//            });
+            task.setOnRunning((successesEvent) -> {
+
+                censorBtn.setDisable(true);
+                warningLabel.setText("Censoring... Please Wait");
+                warningLabel.setVisible(true);
+            });
 
             task.setOnSucceeded((succeededEvent) -> {
-//                lbl2.setText(task.getValue().toString());
-//                btnStart.setDisable(false);
+
+                warningLabel.setVisible(false);
                 AnchorPane endRoot = Main.getRoots(BeepScene.EndScreen);
                 Main.getPrimaryStage().getScene().setRoot(endRoot);
             });
@@ -188,13 +189,11 @@ public class CensorController {
 
         }
 
-
-
-
     }
 
-
-
+    public String getCensoringMethod() {
+        return censoringMethod;
+    }
 }
 
 
