@@ -35,12 +35,15 @@ public class EndController{
     private Button exitBtn;
 
     @FXML
-    private Button saveBtn;
+    private Button playBtn;
+
+    @FXML
+    private Button stopBtn;
 
     @FXML
     private Label audioFileName;
 
-
+    private MediaPlayer mediaPlayer;
 
     private AlignController ac;
     private String censoringMethod;
@@ -60,11 +63,11 @@ public class EndController{
 
 
     @FXML
-    public void save() {
+    public void play() {
 
         if (ac.getAudioFile() == null) {
             audioFileName.setText("You didn't upload a song");
-            saveBtn.setDisable(true);
+            playBtn.setDisable(true);
             return;
         } else {
             System.out.println(ac.getAudioFile().getName());
@@ -79,12 +82,21 @@ public class EndController{
             musicFile = "trimmed-"+ac.getAudioFile().getName();
         }
 
-        Media hit = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        Media song = new Media(new File(musicFile).toURI().toString());
+        mediaPlayer = new MediaPlayer(song);
         mediaPlayer.play();
 
 
-        saveBtn.setDisable(true);
+        playBtn.setDisable(true);
+        stopBtn.setDisable(false);
+
+    }
+
+    @FXML
+    public void stop() {
+        mediaPlayer.stop();
+        playBtn.setDisable(false);
+        stopBtn.setDisable(true);
 
     }
 

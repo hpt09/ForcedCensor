@@ -29,7 +29,7 @@
                 <Font name="Lato Light" size="28.0" />
             </font>
         </Button>
-        <Label alignment="CENTER" layoutX="91.0" layoutY="164.0" prefHeight="67.0" prefWidth="598.0" text="Save your censored song:" textAlignment="JUSTIFY" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="91.0" layoutY="164.0" prefHeight="67.0" prefWidth="598.0" text="Listen to your censored song below:" textAlignment="JUSTIFY" textFill="WHITE">
             <font>
                 <Font name="Lato Light" size="22.0" />
             </font>
@@ -39,7 +39,7 @@
                 <Font name="Lato Light" size="15.0" />
             </font>
         </Label>
-      <Button fx:id="saveBtn" layoutX="331.0" layoutY="235.0" mnemonicParsing="false" onAction="#save" prefHeight="67.0" prefWidth="125.0" styleClass="uploadBtn" text="Save" textFill="#ffffff78">
+      <Button fx:id="playBtn" layoutX="236.0" layoutY="240.0" mnemonicParsing="false" onAction="#play" prefHeight="67.0" prefWidth="125.0" styleClass="uploadBtn" text="Play" textFill="#ffffff78">
          <font>
             <Font name="Lato Light" size="22.0" />
          </font>
@@ -49,5 +49,10 @@
             <Font name="Lato Light" size="22.0" />
          </font>
       </Label>
+      <Button fx:id="stopBtn" disable="true" layoutX="400.0" layoutY="241.0" mnemonicParsing="false" onAction="#stop" prefHeight="67.0" prefWidth="125.0" styleClass="uploadBtn" text="Stop" textFill="#ffffff78">
+         <font>
+            <Font name="Lato Light" size="22.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
