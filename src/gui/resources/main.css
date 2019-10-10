@@ -10,11 +10,14 @@
 
 @font-face {
 
-    src: url("Lato-Light.ttf");
+    src: url("Quicksand.ttf");
 
 
 }
 
+.label {
+    -fx-font-family: "Quicksand";
+}
 .startBtn {
 
 	-fx-background-color: rgba(61,109,151,1);
@@ -62,16 +65,20 @@
 
     -fx-show-delay: 25000ms;
 }
+
+
+.special-label {
+    -fx-font-family: 'Quicksand';
 }
 
 .censorButtons {
     -fx-background-color: rgba(61,109,151,1);
     -fx-text-fill: white;
-    -fx-font-family: 'Lato Light';
+    -fx-font-family: 'Quicksand';
    	-fx-background-radius: 5;
    	-fx-border-radius: 5;
    	-fx-border-color: white;
-    -fx-font-size: 28px;
+    -fx-font-size: 22px;
 
 
 }
@@ -82,7 +89,7 @@
 
     -fx-text-fill: white;
     -fx-cursor: hand;
-    -fx-font-size: 28px;
+    -fx-font-size: 22px;
 }
 
 .censorButtons:selected {
