@@ -18,8 +18,10 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.event.ActionEvent;
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.ResourceBundle;
@@ -57,11 +59,14 @@ public class CensorController {
     private File audioFile;
     private File lyricFile;
 
+    private AlignController ac;
+
 
     public CensorController() {
         System.out.println();
         System.out.println();
         System.out.println("================ CensorController instantiated: " + this);
+        ac = Main.getAlignController();
 
 
     }
@@ -99,6 +104,50 @@ public class CensorController {
         } else {
             // Insert code to do python commands for trimming
             System.out.println("Insert Trimming commands");
+
+            try {
+
+
+                String audioPath= ac.getAudioFile().getAbsolutePath();
+
+
+
+                //System.out.println(audioFile.getName().split(".")[0]);
+                String alignFilePath= "~/AlignmentFiles/"+ac.getAudioFile().getName().split(".mp3")[0]+"output.txt";
+
+                System.out.println(alignFilePath);
+
+                //creates the command and executes it
+                String command = "~/ForcedCensor/censor.sh "+audioPath+" "+alignFilePath;
+
+                System.out.println(command);
+
+                ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+                Process process = pb.start();
+
+                BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+                int exitStatus = process.waitFor();
+
+                //if it passes or fails, print out the error/ success statement
+                if (exitStatus == 0) {
+                    String line;
+                    while ((line = stdout.readLine()) != null) {
+                        System.out.println(line);
+                    }
+                } else {
+                    String line;
+                    while ((line = stderr.readLine()) != null) {
+                        System.err.println(line);
+                    }
+                }
+
+            } catch (Exception f) {
+                f.printStackTrace();
+            }
+
 
         }
 
