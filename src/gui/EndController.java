@@ -62,6 +62,7 @@ public class EndController {
 
         if (ac.getAudioFile() == null) {
             audioFileName.setText("You didn't upload a song");
+            playBtn.setDisable(true);
             return;
         }
         audioFileName.setText(ac.getAudioFile().getName());
@@ -74,8 +75,12 @@ public class EndController {
 
         }
 
-        //System.out.println(getAudioFile().toURI().toString());
-        Media sound = new Media(ac.getAudioFile().toURI().toString());
+        String songPath="FILTERED-"+ac.getAudioFile().getName();
+        File fileToPlay = new File(songPath);
+
+
+        Media sound = new Media(fileToPlay.toURI().toString());
+        //Media sound = new Media(ac.getAudioFile().toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
         playBtn.setDisable(true);

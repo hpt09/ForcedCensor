@@ -54,6 +54,7 @@
 .uploadBtn {
     /* Light green*/
     -fx-background-color: #b2ff59;
+    -fx-text-fill: black;
 }
 
 .uploadBtn :hover{
