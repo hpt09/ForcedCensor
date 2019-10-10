@@ -71,51 +71,20 @@ public class EndController{
         }
 
 
+        String musicFile = null;
+        if (censoringMethod.equals("Filtering")) {
+            musicFile = "filtered-"+ac.getAudioFile().getName();
+        }
+        if (censoringMethod.equals("Trimming")) {
+            musicFile = "trimmed-"+ac.getAudioFile().getName();
+        }
 
-//        FileChooser fc = new FileChooser();
-//        File testFile = fc.showOpenDialog(null);
-//        System.out.println(testFile.toURI().toString());
-        //  file:/home/shane/ForcedCensor/FILTERED-lucier.mp3
-
-//        String songPath= "~/ForcedCensor/FILTERED-" + ac.getAudioFile().getName();
-        //System.out.println("Song path is: " +songPath);
-
-//        File fileToPlay = new File(songPath);
-//        audioFileName.setText(fileToPlay.getName());
-
-        //System.out.println("file:~/ForcedCensor/FILTERED-" + ac.getAudioFile().getName());
-        //System.out.println(ac.getAudioFile().toURI().toString());
-
-//        System.out.println("attempting to play: "+"file:~/ForcedCensor/FILTERED-" + ac.getAudioFile().getName());
-
-        //String musicFile = "filtered-"+ac.getAudioFile().getName();
-        String musicFile = "filtered-lucier.mp3";
-
-        File file = new File(musicFile);
-        System.out.println("Parent: "+file.getParent());
-        System.out.println(file.toURI().toString());
-        System.out.println("Last modified: " +file.lastModified());
-        System.out.println("file length: " + file.length());
-        Media hit = new Media(file.toURI().toString());
+        Media hit = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(hit);
         mediaPlayer.play();
-        System.out.println(mediaPlayer.getCurrentTime());
-        System.out.println(mediaPlayer.getTotalDuration().toSeconds());
-
-       // File file = new File(musicFile);
-       // System.out.println("Reading file: " + musicFile+ " with length: " + file.length());
-        //InputStream is = new FileInputStream(file);
 
 
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Save your censored song");
-        //fc.showSaveDialog();
-//        System.out.println(musicFile);
-//        File file = new File(musicFile);
-//        System.out.println(file.toURI().toString());
-
-
-//        playBtn.setDisable(true);
+        saveBtn.setDisable(true);
 
     }
 
