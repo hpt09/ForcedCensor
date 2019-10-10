@@ -13,7 +13,7 @@ outputString=`python time.py "$2"`
 
 > edits.txt
 rm output*mp3 2> /dev/null
-rm censored-"$1" 2> /dev/null
+rm trimmed-`basename "$1"` 2> /dev/null
 
 IFS=' ' # space is set as delimiter
 read -ra ADDR <<< "$outputString"
