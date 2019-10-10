@@ -153,7 +153,7 @@ public class CensorController {
             System.out.println(alignFilePath);
 
             //creates the command and executes it
-            String command = "cp "+audioPath+" . ; ./censor.sh "+audioName+" "+alignFilePath;
+            String command = "cp -u "+audioPath+" . ; ./censor.sh "+audioName+" "+alignFilePath;
 
             BashTask task = new BashTask(command);
 

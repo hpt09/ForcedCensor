@@ -52,8 +52,10 @@ public class AlignController {
         private Label lyricFileName;
 
         @FXML
-        private Label warningLabel;
+        private Label alignWarningLabel;
 
+        @FXML
+        private Button alignBtn;
 
 
 
@@ -84,7 +86,7 @@ public class AlignController {
             if (((Button) e.getSource()).getId().equals("audioUploadBtn")) {
                 // Audio upload button
                 fc.setTitle("Upload your Audio file");
-                fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Audio files", "*.wav","*.mp3"));
+                fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Audio files", "*.mp3"));
                 audioFile = (fc.showOpenDialog(null));
 
                 if (audioFile != null) {
@@ -135,17 +137,17 @@ public class AlignController {
 
             BashTask task = new BashTask(command);
 
-//            censorBtn.setDisable(true);
-//                censorBtn.setText("Censoring..");
 
-//            task.setOnRunning((succeesesEvent) -> {
-//
-//                censorBtn.setDisable(true);
-//                censorBtn.setText("Censoring..");
-//            });
+            task.setOnRunning((succeesesEvent) -> {
+
+                alignBtn.setDisable(true);
+                alignWarningLabel.setText("Aligning...Please Wait");
+                alignWarningLabel.setVisible(true);
+            });
 
             task.setOnSucceeded((succeededEvent) -> {
 
+                alignWarningLabel.setVisible(false);
                 AnchorPane censorRoot = Main.getRoots(BeepScene.CensorScreen);
                 Main.getPrimaryStage().getScene().setRoot(censorRoot);
             });
