@@ -39,7 +39,7 @@
         </Button>
       <Label alignment="CENTER" layoutX="91.0" layoutY="164.0" prefHeight="67.0" prefWidth="598.0" text="How do you want Beep! to censor your music?" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
-            <Font name="Lato Light" size="22.0" />
+            <Font name="Impact" size="22.0" />
          </font>
       </Label>
       <ToggleButton layoutX="410.0" layoutY="250.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="162.0" styleClass="censorButtons" text="Trimming">
@@ -71,7 +71,7 @@
             <Font name="Lato Light" size="15.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="232.0" layoutY="316.0" prefHeight="42.0" prefWidth="291.0" text="Hover for these options for more info." textAlignment="JUSTIFY" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="183.0" layoutY="318.0" prefHeight="42.0" prefWidth="414.0" text="Hover for these options for more info." textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="17.0" />
          </font>
