@@ -143,49 +143,41 @@ public class CensorController {
             // Insert code to do python commands for trimming
             System.out.println("Insert Trimming commands");
 
-            try {
+            String audioPath= ac.getAudioFile().getAbsolutePath();
+            String audioName = ac.getAudioFile().getName();
 
 
-                String audioPath= ac.getAudioFile().getAbsolutePath();
-                String audioName = ac.getAudioFile().getName();
+            //System.out.println(audioFile.getName().split(".")[0]);
+            String alignFilePath= "~/AlignmentFiles/"+ac.getAudioFile().getName().split(".mp3")[0]+"output.txt";
 
+            System.out.println(alignFilePath);
 
-                //System.out.println(audioFile.getName().split(".")[0]);
-                String alignFilePath= "~/AlignmentFiles/"+ac.getAudioFile().getName().split(".mp3")[0]+"output.txt";
+            //creates the command and executes it
+            String command = "cp "+audioPath+" . ; ./censor.sh "+audioName+" "+alignFilePath;
 
-                System.out.println(alignFilePath);
+            BashTask task = new BashTask(command);
 
-                //creates the command and executes it
-                String command = "cp "+audioPath+" . ; ./censor.sh "+audioName+" "+alignFilePath;
+//            censorBtn.setDisable(true);
+//                censorBtn.setText("Censoring..");
 
-                System.out.println(command);
+            task.setOnRunning((successesEvent) -> {
 
-                ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+                censorBtn.setDisable(true);
+                warningLabel.setText("Censoring... Please Wait");
+                warningLabel.setVisible(true);
+            });
 
-                Process process = pb.start();
+            task.setOnSucceeded((succeededEvent) -> {
 
-                BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                warningLabel.setVisible(false);
+                AnchorPane endRoot = Main.getRoots(BeepScene.EndScreen);
+                Main.getPrimaryStage().getScene().setRoot(endRoot);
+            });
 
-                int exitStatus = process.waitFor();
-
-                //if it passes or fails, print out the error/ success statement
-                if (exitStatus == 0) {
-                    String line;
-                    while ((line = stdout.readLine()) != null) {
-                        System.out.println(line);
-                    }
-                } else {
-                    String line;
-                    while ((line = stderr.readLine()) != null) {
-                        System.err.println(line);
-                    }
-                }
-
-            } catch (Exception f) {
-                f.printStackTrace();
-            }
-
+            ExecutorService executorService
+                    = Executors.newFixedThreadPool(1);
+            executorService.execute(task);
+            executorService.shutdown();
 
         }
 
