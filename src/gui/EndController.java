@@ -46,13 +46,14 @@ public class EndController{
     private MediaPlayer mediaPlayer;
 
     private AlignController ac;
-    private String censoringMethod;
+    private CensorController cc;
 
     public EndController() {
         System.out.println();
         System.out.println();
         System.out.println("================ EndController instantiated: " + this);
         ac = Main.getAlignController();
+        cc = Main.getCensorController();
 
     }
 
@@ -73,7 +74,7 @@ public class EndController{
             System.out.println(ac.getAudioFile().getName());
         }
 
-
+        String censoringMethod = cc.getCensoringMethod();
         String musicFile = null;
         if (censoringMethod.equals("Filtering")) {
             musicFile = "filtered-"+ac.getAudioFile().getName();
@@ -106,9 +107,7 @@ public class EndController{
         audioFileName.setText(name);
     }
 
-    public void setCensoringMethod(String censoringMethod) {
-        this.censoringMethod = censoringMethod;
-    }
+
 }
 
 

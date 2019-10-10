@@ -27,9 +27,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
-    public class AlignController {
+public class AlignController {
 
 
 
@@ -52,6 +54,8 @@ import java.util.ResourceBundle;
         @FXML
         private Label alignWarningLabel;
 
+        @FXML
+        private Button alignBtn;
 
 
 
@@ -82,7 +86,7 @@ import java.util.ResourceBundle;
             if (((Button) e.getSource()).getId().equals("audioUploadBtn")) {
                 // Audio upload button
                 fc.setTitle("Upload your Audio file");
-                fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Audio files", "*.wav","*.mp3"));
+                fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Audio files", "*.mp3"));
                 audioFile = (fc.showOpenDialog(null));
 
                 if (audioFile != null) {
@@ -117,51 +121,44 @@ import java.util.ResourceBundle;
             } else {
                 alignWarningLabel.setVisible(false);
             }
-            AnchorPane censorRoot = Main.getRoots(BeepScene.CensorScreen);
-            Main.getPrimaryStage().getScene().setRoot(censorRoot);
+
 
             // Insert Bash Code here
-            try {
 
-                String audioPath= audioFile.getAbsolutePath();
-                String lyricPath= lyricFile.getAbsolutePath();
+            String audioPath= audioFile.getAbsolutePath();
+            String lyricPath= lyricFile.getAbsolutePath();
 
 
             //System.out.println(audioFile.getName().split(".")[0]);
-                String alignFilePath= "~/AlignmentFiles/"+audioFile.getName().split(".mp3")[0]+"output.txt";
+            String alignFilePath= "~/AlignmentFiles/"+audioFile.getName().split(".mp3")[0]+"output.txt";
 
-                System.out.println(alignFilePath);
+            System.out.println(alignFilePath);
 
-                //creates the command and executes it
-                String command = "if [ ! -f "+alignFilePath+" ]; then python ~/canetis/align.py "+audioPath+" "+lyricPath+" "+alignFilePath+" ; fi";
+            //creates the command and executes it
+            String command = "if [ ! -f "+alignFilePath+" ]; then python ~/canetis/align.py "+audioPath+" "+lyricPath+" "+alignFilePath+" ; fi";
 
-                System.out.println(command);
 
-                ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+            BashTask task = new BashTask(command);
 
-                Process process = pb.start();
 
-                BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            task.setOnRunning((succeesesEvent) -> {
 
-                int exitStatus = process.waitFor();
+                alignBtn.setDisable(true);
+                alignWarningLabel.setText("Aligning...Please Wait");
+                alignWarningLabel.setVisible(true);
+            });
 
-                //if it passes or fails, print out the error/ success statement
-                if (exitStatus == 0) {
-                    String line;
-                    while ((line = stdout.readLine()) != null) {
-                        System.out.println(line);
-                    }
-                } else {
-                    String line;
-                    while ((line = stderr.readLine()) != null) {
-                        System.err.println(line);
-                    }
-                }
+            task.setOnSucceeded((succeededEvent) -> {
 
-            } catch (Exception f) {
-                f.printStackTrace();
-            }
+                alignWarningLabel.setVisible(false);
+                AnchorPane censorRoot = Main.getRoots(BeepScene.CensorScreen);
+                Main.getPrimaryStage().getScene().setRoot(censorRoot);
+            });
+
+            ExecutorService executorService
+                    = Executors.newFixedThreadPool(1);
+            executorService.execute(task);
+            executorService.shutdown();
 
 
         }

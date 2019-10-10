@@ -24,7 +24,7 @@
                 <Font name="Lato Light" size="22.0" />
             </font>
         </Label>
-        <Button layoutX="327.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleAlign" prefHeight="67.0" prefWidth="125.0" styleClass="startBtn" text="Align" textFill="#ffffff78">
+        <Button fx:id="alignBtn" layoutX="327.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleAlign" prefHeight="67.0" prefWidth="125.0" styleClass="startBtn" text="Align" textFill="#ffffff78">
             <font>
                 <Font name="Lato Light" size="22.0" />
             </font>
@@ -46,6 +46,7 @@
             <Font name="Lato Light" size="15.0" />
          </font>
       </Label>
+        <Label fx:id="alignWarningLabel" alignment="CENTER" layoutX="216.0" layoutY="512.0" prefHeight="42.0" prefWidth="346.0" text="Please upload both files!" textAlignment="JUSTIFY" textFill="WHITE" visible="false"></Label>
       <Label alignment="CENTER" layoutX="404.0" layoutY="336.0" prefHeight="21.0" prefWidth="219.0" text="Supported file types: .txt" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="15.0" />
