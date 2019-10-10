@@ -101,15 +101,11 @@ public class CensorController {
             // Insert code to do python commands for filtering
             System.out.println("Insert Filtering commands");
 
-        } else {
-            // Insert code to do python commands for trimming
-            System.out.println("Insert Trimming commands");
-
             try {
 
 
                 String audioPath= ac.getAudioFile().getAbsolutePath();
-
+                String audioName = ac.getAudioFile().getName();
 
 
                 //System.out.println(audioFile.getName().split(".")[0]);
@@ -118,7 +114,54 @@ public class CensorController {
                 System.out.println(alignFilePath);
 
                 //creates the command and executes it
-                String command = "~/ForcedCensor/censor.sh "+audioPath+" "+alignFilePath;
+                String command = "python filter.py "+audioName+" "+alignFilePath;
+
+                System.out.println(command);
+
+                ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
+
+                Process process = pb.start();
+
+                BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+                int exitStatus = process.waitFor();
+
+                //if it passes or fails, print out the error/ success statement
+                if (exitStatus == 0) {
+                    String line;
+                    while ((line = stdout.readLine()) != null) {
+                        System.out.println(line);
+                    }
+                } else {
+                    String line;
+                    while ((line = stderr.readLine()) != null) {
+                        System.err.println(line);
+                    }
+                }
+
+            } catch (Exception f) {
+                f.printStackTrace();
+            }
+
+        } else {
+            // Insert code to do python commands for trimming
+            System.out.println("Insert Trimming commands");
+
+            try {
+
+
+                String audioPath= ac.getAudioFile().getAbsolutePath();
+                String audioName = ac.getAudioFile().getName();
+
+
+                //System.out.println(audioFile.getName().split(".")[0]);
+                String alignFilePath= "~/AlignmentFiles/"+ac.getAudioFile().getName().split(".mp3")[0]+"output.txt";
+
+                System.out.println(alignFilePath);
+
+                //creates the command and executes it
+                String command = "./censor.sh "+audioName+" "+alignFilePath;
 
                 System.out.println(command);
 
