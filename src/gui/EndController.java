@@ -33,7 +33,7 @@ public class EndController{
     private Button exitBtn;
 
     @FXML
-    private Button playBtn;
+    private Button saveBtn;
 
     @FXML
     private Label audioFileName;
@@ -58,11 +58,11 @@ public class EndController{
 
 
     @FXML
-    public void play() {
+    public void save() {
 
         if (ac.getAudioFile() == null) {
             audioFileName.setText("You didn't upload a song");
-            playBtn.setDisable(true);
+            saveBtn.setDisable(true);
             return;
         } else {
             System.out.println(ac.getAudioFile().getName());

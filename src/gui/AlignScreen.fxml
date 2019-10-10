@@ -14,11 +14,6 @@
                 <Image url="@resources/logo.png" />
             </image>
         </ImageView>
-        <Label alignment="CENTER" layoutX="148.0" layoutY="27.0" prefHeight="67.0" prefWidth="484.0" text="Welcome to Beep!" textAlignment="JUSTIFY" textFill="WHITE">
-            <font>
-                <Font name="Lato Light" size="53.0" />
-            </font>
-        </Label>
         <Label alignment="CENTER" layoutX="81.0" layoutY="119.0" prefHeight="67.0" prefWidth="598.0" text="To get started, please upload your audio and lyric files." textAlignment="JUSTIFY" textFill="WHITE">
             <font>
                 <Font name="Lato Light" size="22.0" />
@@ -69,6 +64,11 @@
       <Label fx:id="lyricFileName" alignment="CENTER" layoutX="435.0" layoutY="261.0" prefHeight="21.0" prefWidth="157.0" text="Lyrics" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="158.0" layoutY="37.0" prefHeight="69.0" prefWidth="543.0" text="Beep!     " textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Lato Light" size="53.0" />
          </font>
       </Label>
     </children>
