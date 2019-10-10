@@ -6,12 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Scale;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.stage.StageStyle;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Window;
 
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -63,9 +67,20 @@ public class Main extends Application {
 
         _primaryStage = primaryStage;
 
+        System.out.println(System.getProperty("os.name"));
+        System.out.println(Screen.getPrimary().getDpi());
+
+        Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println(resolution.getWidth());
+        System.out.println(resolution.getHeight());
+
+        double height = resolution.getWidth();
+
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SplashScreen.fxml"));
         splashRoot = loader.load();
+
+        splashRoot.getTransforms().add(new Scale(1, 1080/925,0,0));
         _controller = loader.getController();
 
 
@@ -77,9 +92,10 @@ public class Main extends Application {
         primaryStage.setTitle("Beep!");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("resources/logo.png")));
         primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setResizable(false);
+
 
         loadFXMLS();
 
