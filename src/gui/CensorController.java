@@ -114,7 +114,7 @@ public class CensorController {
                 System.out.println(alignFilePath);
 
                 //creates the command and executes it
-                String command = "python filter.py "+audioName+" "+alignFilePath;
+                String command = "cp "+audioPath+" . ; python filter.py "+audioName+" "+alignFilePath;
 
                 System.out.println(command);
 
@@ -161,7 +161,7 @@ public class CensorController {
                 System.out.println(alignFilePath);
 
                 //creates the command and executes it
-                String command = "./censor.sh "+audioName+" "+alignFilePath;
+                String command = "cp "+audioPath+" . ; ./censor.sh "+audioName+" "+alignFilePath;
 
                 System.out.println(command);
 
