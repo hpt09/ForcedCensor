@@ -19,7 +19,9 @@ import javafx.event.ActionEvent;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.ResourceBundle;
@@ -86,18 +88,33 @@ public class EndController{
 
 //        System.out.println("attempting to play: "+"file:~/ForcedCensor/FILTERED-" + ac.getAudioFile().getName());
 
-//        String musicFile = "FILTERED-"+ac.getAudioFile().getName();
+        //String musicFile = "filtered-"+ac.getAudioFile().getName();
+        String musicFile = "filtered-lucier.mp3";
+
+        File file = new File(musicFile);
+        System.out.println("Parent: "+file.getParent());
+        System.out.println(file.toURI().toString());
+        System.out.println("Last modified: " +file.lastModified());
+        System.out.println("file length: " + file.length());
+        Media hit = new Media(file.toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        mediaPlayer.play();
+        System.out.println(mediaPlayer.getCurrentTime());
+        System.out.println(mediaPlayer.getTotalDuration().toSeconds());
+
+       // File file = new File(musicFile);
+       // System.out.println("Reading file: " + musicFile+ " with length: " + file.length());
+        //InputStream is = new FileInputStream(file);
+
+
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Save your censored song");
+        //fc.showSaveDialog();
 //        System.out.println(musicFile);
 //        File file = new File(musicFile);
 //        System.out.println(file.toURI().toString());
-//        Media sound = new Media(file.toURI().toString());
-        //Media sound = new Media("file:/home/shane/ForcedCensor/censored-drake-back-to-back.mp3");
 
-//        Media sound = new Media(fileToPlay.toURI().toString());
-//        Media sound = new Media("file:/home/shane/ForcedCensor/FILTERED-" + ac.getAudioFile().getName());
 
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.play();
 //        playBtn.setDisable(true);
 
     }
