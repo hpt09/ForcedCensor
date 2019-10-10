@@ -1,6 +1,8 @@
 package gui;
 
 import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +27,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static javafx.fxml.FXMLLoader.load;
 
@@ -101,48 +105,38 @@ public class CensorController {
             // Insert code to do python commands for filtering
             System.out.println("Insert Filtering commands");
 
-            try {
+            String audioPath= ac.getAudioFile().getAbsolutePath();
+            String audioName = ac.getAudioFile().getName();
+
+            //System.out.println(audioFile.getName().split(".")[0]);
+            String alignFilePath= "~/AlignmentFiles/"+ac.getAudioFile().getName().split(".mp3")[0]+"output.txt";
+
+            String command = "cp "+audioPath+" . ; python filter.py "+audioName+" "+alignFilePath;
+
+            BashTask task = new BashTask(command);
+
+//            censorBtn.setDisable(true);
+//                censorBtn.setText("Censoring..");
+
+//            task.setOnRunning((succeesesEvent) -> {
+//
+//                censorBtn.setDisable(true);
+//                censorBtn.setText("Censoring..");
+//            });
+
+            task.setOnSucceeded((succeededEvent) -> {
+//                lbl2.setText(task.getValue().toString());
+//                btnStart.setDisable(false);
+                AnchorPane endRoot = Main.getRoots(BeepScene.EndScreen);
+                Main.getPrimaryStage().getScene().setRoot(endRoot);
+            });
+
+            ExecutorService executorService
+                    = Executors.newFixedThreadPool(1);
+            executorService.execute(task);
+            executorService.shutdown();
 
 
-                String audioPath= ac.getAudioFile().getAbsolutePath();
-                String audioName = ac.getAudioFile().getName();
-
-
-                //System.out.println(audioFile.getName().split(".")[0]);
-                String alignFilePath= "~/AlignmentFiles/"+ac.getAudioFile().getName().split(".mp3")[0]+"output.txt";
-
-                System.out.println(alignFilePath);
-
-                //creates the command and executes it
-                String command = "cp "+audioPath+" . ; python filter.py "+audioName+" "+alignFilePath;
-
-                System.out.println(command);
-
-                ProcessBuilder pb = new ProcessBuilder("bash", "-c", command);
-
-                Process process = pb.start();
-
-                BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-
-                int exitStatus = process.waitFor();
-
-                //if it passes or fails, print out the error/ success statement
-                if (exitStatus == 0) {
-                    String line;
-                    while ((line = stdout.readLine()) != null) {
-                        System.out.println(line);
-                    }
-                } else {
-                    String line;
-                    while ((line = stderr.readLine()) != null) {
-                        System.err.println(line);
-                    }
-                }
-
-            } catch (Exception f) {
-                f.printStackTrace();
-            }
 
         } else {
             // Insert code to do python commands for trimming
@@ -161,7 +155,7 @@ public class CensorController {
                 System.out.println(alignFilePath);
 
                 //creates the command and executes it
-                String command = "cp "+audioPath+" . ; ./censor.sh -u "+audioName+" "+alignFilePath;
+                String command = "cp "+audioPath+" . ; ./censor.sh "+audioName+" "+alignFilePath;
 
                 System.out.println(command);
 
@@ -194,18 +188,7 @@ public class CensorController {
 
         }
 
-        //Send AudioFileName to controller
-        EndController eC = Main.getEndController();
-        eC.setCensoringMethod(censoringMethod);
-        if (censoringMethod.equals("Filtering")) {
-            eC.setAudioFileName("filtered-"+ac.getAudioFile().getName());
-        } else {
-            eC.setAudioFileName("trimmed-"+ac.getAudioFile().getName());
 
-        }
-
-        AnchorPane endRoot = Main.getRoots(BeepScene.EndScreen);
-        Main.getPrimaryStage().getScene().setRoot(endRoot);
 
 
     }
