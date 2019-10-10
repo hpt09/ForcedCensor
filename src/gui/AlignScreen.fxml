@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="553.0" prefWidth="759.0" stylesheets="@resources/main.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AlignController">
     <children>
-      <Label fx:id="alignWarningLabel" alignment="CENTER" layoutX="216.0" layoutY="512.0" prefHeight="42.0" prefWidth="346.0" text="Please upload both files!" textAlignment="JUSTIFY" textFill="WHITE">
+      <Label fx:id="alignWarningLabel" alignment="CENTER" layoutX="216.0" layoutY="509.0" prefHeight="42.0" prefWidth="346.0" text="Please upload both files!" textAlignment="JUSTIFY" textFill="WHITE" visible="false">
          <font>
             <Font name="Lato Light" size="15.0" />
          </font>
@@ -19,7 +19,7 @@
                 <Image url="@resources/logo.png" />
             </image>
         </ImageView>
-        <Label alignment="CENTER" layoutX="81.0" layoutY="119.0" prefHeight="67.0" prefWidth="598.0" text="To get started, please upload your audio and lyric files." textAlignment="JUSTIFY" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="2.0" layoutY="119.0" prefHeight="67.0" prefWidth="756.0" text="To get started, please upload your audio and lyric files." textAlignment="JUSTIFY" textFill="WHITE">
             <font>
                 <Font name="Lato Light" size="22.0" />
             </font>
@@ -46,7 +46,7 @@
             <Font name="Lato Light" size="15.0" />
          </font>
       </Label>
-        <Label fx:id="alignWarningLabel" alignment="CENTER" layoutX="216.0" layoutY="512.0" prefHeight="42.0" prefWidth="346.0" text="Please upload both files!" textAlignment="JUSTIFY" textFill="WHITE" visible="false"></Label>
+        <Label fx:id="alignWarningLabel" alignment="CENTER" layoutX="216.0" layoutY="512.0" prefHeight="42.0" prefWidth="346.0" text="Please upload both files!" textAlignment="JUSTIFY" textFill="WHITE" visible="false" />
       <Label alignment="CENTER" layoutX="404.0" layoutY="336.0" prefHeight="21.0" prefWidth="219.0" text="Supported file types: .txt" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="15.0" />
