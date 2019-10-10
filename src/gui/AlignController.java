@@ -50,7 +50,7 @@ import java.util.ResourceBundle;
         private Label lyricFileName;
 
         @FXML
-        private Label warningLabel;
+        private Label alignWarningLabel;
 
 
 
@@ -112,7 +112,10 @@ import java.util.ResourceBundle;
         public void handleAlign() throws IOException {
 
             if (audioFile == null || lyricFile == null) {
+                alignWarningLabel.setVisible(true);
                 return;
+            } else {
+                alignWarningLabel.setVisible(false);
             }
             AnchorPane censorRoot = Main.getRoots(BeepScene.CensorScreen);
             Main.getPrimaryStage().getScene().setRoot(censorRoot);
