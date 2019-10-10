@@ -19,7 +19,7 @@
             <Font name="Lato Light" size="53.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="81.0" layoutY="320.0" prefHeight="67.0" prefWidth="598.0" text="Censoring explicit content in music using machine learning." textAlignment="JUSTIFY" textFill="WHITE">
+      <Label alignment="CENTER" layoutY="320.0" prefHeight="67.0" prefWidth="757.0" text="Censoring explicit content in music using machine learning." textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Lato Light" size="22.0" />
          </font>
