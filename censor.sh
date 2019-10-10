@@ -37,4 +37,4 @@ ffmpeg -f concat -i edits.txt -c copy censored-"$1" 2> /dev/null
 
 rm output*mp3
 rm edits.txt
-
+ 
